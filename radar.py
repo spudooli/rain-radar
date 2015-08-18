@@ -9,7 +9,6 @@ data = json.load(urllib2.urlopen(radarurl))
 for item in data:
 		
 		jpg = "." + item['url']
-		print jpg
 
 		fullurl = "http://www.metservice.com" + item['url']
 		
