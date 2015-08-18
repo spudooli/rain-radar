@@ -22,3 +22,5 @@ for item in data:
 		fh.close()
 
 os.system("convert -delay 100 /www/data/house/dashboard/IcePics/ob/*.jpeg /www/data/house/dashboard/IcePics/ob/radar.gif")
+os.system("rm /www/data/house/dashboard/IcePics/ob/*.jpeg")
+
