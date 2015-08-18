@@ -21,6 +21,9 @@ for item in data:
 		fh.write(response.read())
 		fh.close()
 
+		convertjpg = "convert -gravity Center " + jpg + " -crop 70%x+0+0 " + jpg
+		os.system(convertjpg)
+
 os.system("convert -delay 100 /www/data/house/dashboard/IcePics/ob/*.jpeg /www/data/house/dashboard/IcePics/ob/radar.gif")
 os.system("rm /www/data/house/dashboard/IcePics/ob/*.jpeg")
 
