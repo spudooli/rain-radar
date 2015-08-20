@@ -42,8 +42,11 @@ isojpg = "/var/www/house/dashboard" + isobarimage
 
 isoresponse = urllib2.urlopen(fullisourl)
 
-fh = open(isojpg, "wb")
+fh = open('/var/www/house/dashboard/isobars.jpeg', "wb")
 
 # read from request while writing to file
 fh.write(isoresponse.read())
 fh.close()
+
+convertjpg = "convert -gravity Center /var/www/house/dashboard/isobars.jpeg -crop 80%x+0+0 /var/www/house/dashboard/isobars.jpeg"
+os.system(convertjpg)
