@@ -27,3 +27,23 @@ for item in data:
 os.system("convert -delay 50 /www/data/house/dashboard/IcePics/ob/*.jpeg /www/data/house/dashboard/IcePics/ob/radar.gif")
 os.system("rm /www/data/house/dashboard/IcePics/ob/*.jpeg")
 
+
+isobars = "http://metservice.com/publicData/tasmanSeaCombinedCharts"
+
+isodata = json.load(urllib2.urlopen(isobars))
+
+w = isodata['imageData']
+
+isobarimage = w[3]['url'] 
+
+fullisourl = "http://www.metservice.com" + isobarimage
+
+isojpg = "/var/www/house/dashboard" + isobarimage
+
+isoresponse = urllib2.urlopen(fullisourl)
+
+fh = open(isojpg, "wb")
+
+# read from request while writing to file
+fh.write(isoresponse.read())
+fh.close()
