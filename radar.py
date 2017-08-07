@@ -7,8 +7,11 @@ radarurl = "http://metservice.com/publicData/rainRadarAuckland_2h_7min_300K"
 data = json.load(urllib2.urlopen(radarurl))
 
 for item in data:
-		
-		jpg = "/var/www/house/dashboard" + item['url']
+		validFromRaw = item['validFromRaw']
+                validFromRaw = str(validFromRaw)
+                print validFromRaw
+		jpg = "/var/www/house/dashboard/publicData/" + validFromRaw + '.jpg'
+                print jpg
 
 		fullurl = "http://www.metservice.com" + item['url']
 		
@@ -24,8 +27,8 @@ for item in data:
 		convertjpg = "convert -gravity Center " + jpg + " -crop 70%x+0+0 " + jpg
 		os.system(convertjpg)
 
-os.system("convert -delay 50 /www/data/house/dashboard/IcePics/ob/*.jpeg /www/data/house/dashboard/IcePics/ob/radar.gif")
-os.system("rm /www/data/house/dashboard/IcePics/ob/*.jpeg")
+os.system("convert -delay 50 /var/www/house/dashboard/publicData/* /var/www/house/dashboard/radar.gif")
+os.system("rm /var/www/house/dashboard/publicData/*")
 
 
 isobars = "http://metservice.com/publicData/tasmanSeaCombinedCharts"
