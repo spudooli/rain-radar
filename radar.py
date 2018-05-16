@@ -10,6 +10,7 @@ for item in data:
 		validFromRaw = item['validFromRaw']
                 validFromRaw = str(validFromRaw)
                 print validFromRaw
+                shortDateTime = item['shortDateTime']
 		jpg = "/var/www/house/dashboard/publicData/" + validFromRaw + '.jpg'
                 print jpg
 
@@ -24,8 +25,14 @@ for item in data:
 		fh.write(response.read())
 		fh.close()
 
-		convertjpg = "convert -gravity Center " + jpg + " -crop 70%x+0+0 " + jpg
+                convertjpg = "convert -gravity Center " + jpg + " -crop 70%x+0+0 " + jpg
+
 		os.system(convertjpg)
+
+                labeljpg = "convert -pointsize 20 -fill yellow -draw 'text 20,400 \"" + shortDateTime +  "\"' " + jpg + " " + jpg
+                print labeljpg
+
+		os.system(labeljpg)
 
 os.system("convert -delay 50 /var/www/house/dashboard/publicData/* /var/www/house/dashboard/radar.gif")
 os.system("rm /var/www/house/dashboard/publicData/*")
